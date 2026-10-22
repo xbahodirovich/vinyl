@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Vinyl \u2014 Yandex Music Bridge",
+  "version": "0.1.0",
+  "description": "Show Yandex Music playback and artwork in Vinyl on your Mac.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqHfFdm/6+/qFDxswHB/M0VM5LiKPNrPJdd8tslgTKdTwBP3/pWnrA+vA62u/ErvpVX3WSCcAPt42wz8tuu5oEqo2XS0QnHQ+gI6wc8QaolTeiJXYz3wQCDoqcWutwFC7HqPVoUMtHpqCSt5535cxrxixxdBrs4iBflTx15Dvla1e92++7u7KxrgbiQbfIQNMgveROwawOCx8nUO+rtpY9pUTnwAf5B9GrcZ7sSja8B8qwhqUitH+Sjgb5dUnjrJajv2JmsWaRkOLFW/m4Z+86IYn7aS446o4EgBdy4kmVKycVYKws1lLP07E7059kR5skZoI+Bxer0y3CY0ehm65MwIDAQAB",
+  "permissions": [
+    "nativeMessaging"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://music.yandex.ru/*",
+        "https://music.yandex.com/*",
+        "https://music.yandex.kz/*",
+        "https://music.yandex.uz/*",
+        "https://music.yandex.by/*"
+      ],
+      "js": [
+        "page.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://music.yandex.ru/*",
+        "https://music.yandex.com/*",
+        "https://music.yandex.kz/*",
+        "https://music.yandex.uz/*",
+        "https://music.yandex.by/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    }
+  ]
+}

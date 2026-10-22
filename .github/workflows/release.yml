@@ -1,0 +1,43 @@
+name: Release DMG
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: macos-26
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - name: Validate version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' Resources/Info.plist)
+          test "$RELEASE_TAG" = "v$VERSION"
+      - run: python3 Scripts/check-publication.py
+      - run: Scripts/scan-secrets.sh
+      - run: swift test --disable-sandbox
+      - run: node Scripts/test-browser.mjs
+      - name: Build universal app
+        env:
+          VINYL_UNIVERSAL: '1'
+        run: Scripts/build.sh
+      - name: Package and checksum
+        run: Scripts/package-dmg.sh
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" dist/*.dmg dist/*.sha256 \
+            --verify-tag --title "Vinyl $RELEASE_TAG" --notes-file .github/RELEASE_NOTES.md

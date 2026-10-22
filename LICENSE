@@ -1,0 +1,17 @@
+Copyright (c) 2026 xbahodirovich. All rights reserved.
+
+No open-source license is granted for Vinyl's original code or original project
+assets. Public access to this repository does not grant permission to copy,
+modify, redistribute, sublicense, sell, or incorporate that work into other
+projects. Obtain prior written permission from the copyright holder for reuse,
+except where applicable law or the hosting platform's terms provide otherwise.
+
+Third-party components and materials are excluded from this notice and retain
+their respective licenses and ownership. In particular, mediaremote-adapter is
+licensed under the BSD 3-Clause license included at:
+
+    Vendor/mediaremote-adapter/LICENSE
+
+Album artwork is not owned or licensed by this project. The supplied app icon
+and reference-derived generated scene assets remain subject to their respective
+rights; this notice does not claim ownership of third-party material.

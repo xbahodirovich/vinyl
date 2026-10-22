@@ -1,0 +1,10 @@
+# Only the exact, intentionally public extension identity is allowlisted.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public Chrome extension identifier, not signing material"
+condition = "AND"
+paths = ['''(?:^|/)BrowserExtension/manifest\.json$''']
+regexTarget = "secret"
+regexes = ['''^MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqHfFdm\/6\+\/qFDxswHB\/M0VM5LiKPNrPJdd8tslgTKdTwBP3\/pWnrA\+vA62u\/ErvpVX3WSCcAPt42wz8tuu5oEqo2XS0QnHQ\+gI6wc8QaolTeiJXYz3wQCDoqcWutwFC7HqPVoUMtHpqCSt5535cxrxixxdBrs4iBflTx15Dvla1e92\+\+7u7KxrgbiQbfIQNMgveROwawOCx8nUO\+rtpY9pUTnwAf5B9GrcZ7sSja8B8qwhqUitH\+Sjgb5dUnjrJajv2JmsWaRkOLFW\/m4Z\+86IYn7aS446o4EgBdy4kmVKycVYKws1lLP07E7059kR5skZoI\+Bxer0y3CY0ehm65MwIDAQAB$''']
